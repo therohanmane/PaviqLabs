@@ -45,29 +45,7 @@ export const services = [
 
 
 
-export const testimonials = [
-  {
-    text: 'PaviqLabs transformed our digital infrastructure in just 3 months. The attention to detail and technical depth is unmatched. Our platform now handles 10x the load with zero downtime.',
-    name: 'Arjun Mehta',
-    role: 'CTO, FinNova Solutions',
-    initials: 'AM',
-    stars: 5,
-  },
-  {
-    text: 'Working with PaviqLabs was a game-changer. They delivered a cybersecurity audit that uncovered critical vulnerabilities and provided actionable recommendations our team could act on immediately.',
-    name: 'Priya Sharma',
-    role: 'CISO, HealthBridge India',
-    initials: 'PS',
-    stars: 5,
-  },
-  {
-    text: 'The mobile app they built for us exceeded all expectations. Clean code, beautiful UI, and they genuinely understood our users. Highly recommend for any serious digital project.',
-    name: 'Rahul Gupta',
-    role: 'Founder, RetailEdge',
-    initials: 'RG',
-    stars: 5,
-  },
-]
+export const testimonials = []
 
 // blogPosts are now fetched dynamically from the database using /api/insights
 
@@ -86,11 +64,11 @@ export const processSteps = [
 ]
 
 export const jobOpenings = [
-  { title: 'Senior Full-Stack Developer', type: 'Full-Time', location: 'Remote', dept: 'Engineering' },
-  { title: 'Cybersecurity Analyst', type: 'Full-Time', location: 'Hybrid', dept: 'Security' },
-  { title: 'AI/ML Engineer', type: 'Full-Time', location: 'Remote', dept: 'AI Research' },
-  { title: 'UI/UX Designer', type: 'Full-Time', location: 'Remote', dept: 'Design' },
-  { title: 'DevOps Engineer', type: 'Contract', location: 'Remote', dept: 'Infrastructure' },
+  { title: 'Senior Full-Stack Developer', type: 'Full-Time', location: 'Remote', dept: 'Engineering', enabled: false },
+  { title: 'Cybersecurity Analyst', type: 'Full-Time', location: 'Hybrid', dept: 'Security', enabled: false },
+  { title: 'AI/ML Engineer', type: 'Full-Time', location: 'Remote', dept: 'AI Research', enabled: false },
+  { title: 'UI/UX Designer', type: 'Full-Time', location: 'Remote', dept: 'Design', enabled: false },
+  { title: 'DevOps Engineer', type: 'Contract', location: 'Remote', dept: 'Infrastructure', enabled: false },
 ]
 
 export const founders = [

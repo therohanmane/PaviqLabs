@@ -127,6 +127,52 @@ export default function Hero() {
           <div className="fluid-orb fluid-orb-3" />
         </div>
 
+        {/* ─── GLOBAL TRUST & DEVELOPMENT ANIMATION ─── */}
+        <div className="hero-global-visual">
+          <svg viewBox="0 0 1000 1000" className="hero-globe-svg">
+            <defs>
+              <radialGradient id="trust-glow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" style={{stopColor:'var(--gold)', stopOpacity:0.25}} />
+                <stop offset="100%" style={{stopColor:'var(--gold)', stopOpacity:0}} />
+              </radialGradient>
+            </defs>
+
+            {/* Background Globe Wireframe */}
+            <g className="globe-wireframe">
+              {[...Array(12)].map((_, i) => (
+                <ellipse key={`lat-${i}`} cx="500" cy="500" rx="400" ry={400 * Math.sin((i + 1) * Math.PI / 13)} fill="none" strokeWidth="0.5" />
+              ))}
+              {[...Array(12)].map((_, i) => (
+                <ellipse key={`lon-${i}`} cx="500" cy="500" rx={400 * Math.sin((i + 1) * Math.PI / 13)} ry="400" fill="none" strokeWidth="0.5" />
+              ))}
+              <circle cx="500" cy="500" r="400" fill="none" strokeWidth="1" />
+            </g>
+
+            {/* Trust Pulse Rings */}
+            <circle cx="500" cy="500" r="100" className="trust-pulse-ring" fill="none" />
+            <circle cx="500" cy="500" r="100" className="trust-pulse-ring" fill="none" style={{animationDelay: '2s'}} />
+            <circle cx="500" cy="500" r="100" className="trust-pulse-ring" fill="none" style={{animationDelay: '4s'}} />
+
+            {/* Connecting Global Nodes */}
+            <g className="global-connections">
+              {[
+                {x: 300, y: 350}, {x: 700, y: 400}, {x: 400, y: 700}, 
+                {x: 600, y: 250}, {x: 250, y: 600}, {x: 750, y: 650}
+              ].map((node, i) => (
+                <g key={`node-group-${i}`}>
+                  <line x1="500" y1="500" x2={node.x} y2={node.y} className="connection-line" strokeWidth="0.5" />
+                  <circle cx={node.x} cy={node.y} r="4" className="connection-node" style={{animationDelay: `${i * 0.5}s`}} />
+                </g>
+              ))}
+            </g>
+
+            {/* Speed Streaks */}
+            {[...Array(5)].map((_, i) => (
+              <line key={`streak-${i}`} x1="0" y1={200 + i * 150} x2="300" y2={200 + i * 150} className="hero-speed-streak" style={{animationDelay: `${i * 0.7}s`}} />
+            ))}
+          </svg>
+        </div>
+
         {heroImages.map((img) => {
           const pos = positions[img._id] || { x: img.xPos, y: img.yPos }
           const depth = img.scale || 1

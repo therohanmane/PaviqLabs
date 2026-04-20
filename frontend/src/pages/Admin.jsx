@@ -137,11 +137,7 @@ export default function Admin() {
       { label: 'Projects Delivered', value: '10', suffix: '+', enabled: true },
       { label: 'Client Satisfaction', value: '100', suffix: '%', enabled: true }
     ],
-    testimonials: [
-      { text: 'PaviqLabs transformed our digital infrastructure in just 3 months. The attention to detail and technical depth is unmatched. Our platform now handles 10x the load with zero downtime.', name: 'Arjun Mehta', role: 'CTO, FinNova Solutions', initials: 'AM', stars: 5, enabled: true },
-      { text: 'Working with PaviqLabs was a game-changer. They delivered a cybersecurity audit that uncovered critical vulnerabilities and provided actionable recommendations our team could act on immediately.', name: 'Priya Sharma', role: 'CISO, HealthBridge India', initials: 'PS', stars: 5, enabled: true },
-      { text: 'The mobile app they built for us exceeded all expectations. Clean code, beautiful UI, and they genuinely understood our users. Highly recommend for any serious digital project.', name: 'Rahul Gupta', role: 'Founder, RetailEdge', initials: 'RG', stars: 5, enabled: true }
-    ],
+    testimonials: [],
     processSteps: [
       { num: '01', icon: '🔍', title: 'Discover & Assess', desc: 'We map your requirements, infrastructure, and security posture before touching a single tool.', enabled: true },
       { num: '02', icon: '🛠️', title: 'Plan & Architect', desc: 'We design a secure, scalable solution — cloud setup, pipelines, and tech stack — before we build.', enabled: true },
@@ -154,11 +150,11 @@ export default function Admin() {
       { initials: 'KS', name: 'Kaushal Singh', role: 'Co-Founder', bio: "A strategic mind with a deep passion for cybersecurity and digital transformation.", linkedin: 'https://www.linkedin.com/company/paviqlabs', enabled: true }
     ],
     jobOpenings: [
-      { title: 'Senior Full-Stack Developer', type: 'Full-Time', location: 'Remote', dept: 'Engineering', enabled: true },
-      { title: 'Cybersecurity Analyst', type: 'Full-Time', location: 'Hybrid', dept: 'Security', enabled: true },
-      { title: 'AI/ML Engineer', type: 'Full-Time', location: 'Remote', dept: 'AI Research', enabled: true },
-      { title: 'UI/UX Designer', type: 'Full-Time', location: 'Remote', dept: 'Design', enabled: true },
-      { title: 'DevOps Engineer', type: 'Contract', location: 'Remote', dept: 'Infrastructure', enabled: true }
+      { title: 'Senior Full-Stack Developer', type: 'Full-Time', location: 'Remote', dept: 'Engineering', enabled: false },
+      { title: 'Cybersecurity Analyst', type: 'Full-Time', location: 'Hybrid', dept: 'Security', enabled: false },
+      { title: 'AI/ML Engineer', type: 'Full-Time', location: 'Remote', dept: 'AI Research', enabled: false },
+      { title: 'UI/UX Designer', type: 'Full-Time', location: 'Remote', dept: 'Design', enabled: false },
+      { title: 'DevOps Engineer', type: 'Contract', location: 'Remote', dept: 'Infrastructure', enabled: false }
     ]
   })
 

@@ -13,7 +13,7 @@ Be warm, professional, and concise. Help visitors understand PaviqLabs' services
 export default function LiveChat() {
   const [open, setOpen] = useState(false)
   const [messages, setMessages] = useState([
-    { role: 'bot', text: 'Hi! 👋 I\'m PaviqBot. How can I help you today? Ask me anything about our services, team, or how to get started.' }
+    { role: 'bot', text: "Hi! 👋 I'm PaviqBot. How can I help you today? You can ask about our services, how to contact the owner, or what domains we work in." }
   ])
   const [input, setInput] = useState('')
   const [typing, setTyping] = useState(false)
@@ -30,31 +30,27 @@ export default function LiveChat() {
     setMessages(prev => [...prev, { role: 'user', text }])
     setTyping(true)
 
-    try {
-      // Build conversation history for API
-      const history = messages
-        .filter(m => m.role !== 'bot' || messages.indexOf(m) > 0)
-        .map(m => ({ role: m.role === 'bot' ? 'assistant' : 'user', content: m.text }))
-      history.push({ role: 'user', content: text })
-
-      const res = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
-          max_tokens: 1000,
-          system: SYSTEM_PROMPT,
-          messages: history,
-        }),
-      })
-      const data = await res.json()
-      const reply = data.content?.[0]?.text || 'Sorry, I had trouble connecting. Please email us at info@paviqlabs.in'
-      setMessages(prev => [...prev, { role: 'bot', text: reply }])
-    } catch {
-      setMessages(prev => [...prev, { role: 'bot', text: 'Connection error. Please reach us at info@paviqlabs.in or call +91 9405 980 596.' }])
-    } finally {
-      setTyping(false)
+    const botResponses = {
+      'contact': 'You can connect with the owners/team directly via:\n\n📧 Official Email: info@paviqlabs.in\n📞 Contact: +91 9405 980 596\n\nFeel free to reach out anytime!',
+      'domain': 'We specialize in several domains including:\n\n✅ Web & Mobile Development\n✅ Cybersecurity & VAPT\n✅ Cloud Infrastructure (AWS/GCP)\n✅ AI & Automation\n✅ UI/UX Design\n\nFor more specific info, please contact our team!'
     }
+
+    // Basic logic for Q&A
+    setTimeout(() => {
+      const lowerText = text.toLowerCase()
+      let reply = ''
+
+      if (lowerText.includes('contact') || lowerText.includes('owner') || lowerText.includes('connect') || lowerText.includes('email') || lowerText.includes('phone')) {
+        reply = botResponses['contact']
+      } else if (lowerText.includes('domain') || lowerText.includes('work') || lowerText.includes('service') || lowerText.includes('type')) {
+        reply = botResponses['domain']
+      } else {
+        reply = "I'm not sure about that. Please contact our team at info@paviqlabs.in or +91 9405 980 596 for more information!"
+      }
+
+      setMessages(prev => [...prev, { role: 'bot', text: reply }])
+      setTyping(false)
+    }, 800)
   }
 
   const onKey = e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send() } }

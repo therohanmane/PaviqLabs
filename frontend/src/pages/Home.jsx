@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import api from '../utils/api.js'
 import Navbar from '../components/Navbar.jsx'
 import Footer from '../components/Footer.jsx'
@@ -26,11 +26,7 @@ const DEFAULT_SETTINGS = {
     { label: 'Projects Delivered', value: '10', suffix: '+', enabled: true },
     { label: 'Client Satisfaction', value: '100', suffix: '%', enabled: true }
   ],
-  testimonials: [
-    { text: 'PaviqLabs transformed our digital infrastructure in just 3 months. The attention to detail and technical depth is unmatched. Our platform now handles 10x the load with zero downtime.', name: 'Arjun Mehta', role: 'CTO, FinNova Solutions', initials: 'AM', stars: 5, enabled: true },
-    { text: 'Working with PaviqLabs was a game-changer. They delivered a cybersecurity audit that uncovered critical vulnerabilities and provided actionable recommendations our team could act on immediately.', name: 'Priya Sharma', role: 'CISO, HealthBridge India', initials: 'PS', stars: 5, enabled: true },
-    { text: 'The mobile app they built for us exceeded all expectations. Clean code, beautiful UI, and they genuinely understood our users. Highly recommend for any serious digital project.', name: 'Rahul Gupta', role: 'Founder, RetailEdge', initials: 'RG', stars: 5, enabled: true }
-  ],
+  testimonials: [],
   processSteps: [
     { num: '01', icon: '🔍', title: 'Discover & Assess', desc: 'We map your requirements, infrastructure, and security posture before touching a single tool.', enabled: true },
     { num: '02', icon: '🛠️', title: 'Plan & Architect', desc: 'We design a secure, scalable solution — cloud setup, pipelines, and tech stack — before we build.', enabled: true },
@@ -59,11 +55,11 @@ const DEFAULT_SETTINGS = {
     }
   ],
   jobOpenings: [
-    { title: 'Senior Full-Stack Developer', type: 'Full-Time', location: 'Remote', dept: 'Engineering', enabled: true },
-    { title: 'Cybersecurity Analyst', type: 'Full-Time', location: 'Hybrid', dept: 'Security', enabled: true },
-    { title: 'AI/ML Engineer', type: 'Full-Time', location: 'Remote', dept: 'AI Research', enabled: true },
-    { title: 'UI/UX Designer', type: 'Full-Time', location: 'Remote', dept: 'Design', enabled: true },
-    { title: 'DevOps Engineer', type: 'Contract', location: 'Remote', dept: 'Infrastructure', enabled: true }
+    { title: 'Senior Full-Stack Developer', type: 'Full-Time', location: 'Remote', dept: 'Engineering', enabled: false },
+    { title: 'Cybersecurity Analyst', type: 'Full-Time', location: 'Hybrid', dept: 'Security', enabled: false },
+    { title: 'AI/ML Engineer', type: 'Full-Time', location: 'Remote', dept: 'AI Research', enabled: false },
+    { title: 'UI/UX Designer', type: 'Full-Time', location: 'Remote', dept: 'Design', enabled: false },
+    { title: 'DevOps Engineer', type: 'Contract', location: 'Remote', dept: 'Infrastructure', enabled: false }
   ]
 }
 
@@ -124,7 +120,77 @@ export default function Home() {
           <div className="about-grid">
             <div className="about-visual reveal">
               <div className="about-card-main">
-                <img src="/logo.png" alt="PaviqLabs" className="about-logo-image" />
+                <div className="tech-animation-container">
+                  <svg viewBox="0 0 400 400" className="tech-universe-svg">
+                    <defs>
+                      <filter id="glow">
+                        <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+                        <feMerge>
+                          <feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                      </filter>
+                      <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style={{stopColor:'#C9A84C', stopOpacity:1}} />
+                        <stop offset="100%" style={{stopColor:'#E8C97A', stopOpacity:1}} />
+                      </linearGradient>
+                    </defs>
+
+                    {/* ─── DATA ANALYST: Neural Network & Insights ─── */}
+                    <g className="data-layer">
+                      {[...Array(12)].map((_, i) => (
+                        <line key={`node-line-${i}`} 
+                          x1={200 + 130 * Math.cos(i * 30 * Math.PI/180)} 
+                          y1={200 + 130 * Math.sin(i * 30 * Math.PI/180)}
+                          x2={200} y2={200}
+                          className="neural-path"
+                        />
+                      ))}
+                      {[...Array(8)].map((_, i) => (
+                        <circle key={`data-point-${i}`}
+                          cx={200 + 130 * Math.cos(i * 45 * Math.PI/180)}
+                          cy={200 + 130 * Math.sin(i * 45 * Math.PI/180)}
+                          r="4" className="data-point-pulse"
+                        />
+                      ))}
+                      {/* Dynamic Chart Overlay */}
+                      <path d="M120,280 L140,240 L160,260 L180,210 L200,230 L220,180 L240,220 L260,190" 
+                        className="analysis-line" fill="none" stroke="url(#gold-grad)" strokeWidth="2" />
+                    </g>
+
+                    {/* ─── DEVOPS: Automated Pipeline & Gears ─── */}
+                    <g className="devops-layer">
+                      <circle cx="200" cy="200" r="100" className="pipeline-orbit" fill="none" stroke="rgba(201,168,76,0.1)" strokeWidth="1" strokeDasharray="10 5" />
+                      {[...Array(4)].map((_, i) => (
+                        <rect key={`container-${i}`} x="-10" y="-10" width="20" height="20" rx="4"
+                          className={`deployment-box box-${i+1}`} fill="rgba(201,168,76,0.2)" stroke="#C9A84C" strokeWidth="1"
+                        />
+                      ))}
+                      {/* Central Gear */}
+                      <g className="core-gear">
+                        <circle cx="200" cy="200" r="30" fill="none" stroke="#C9A84C" strokeWidth="6" strokeDasharray="15 5" />
+                        <circle cx="200" cy="200" r="15" fill="#C9A84C" />
+                      </g>
+                    </g>
+
+                    {/* ─── CYBERSECURITY: Encryption & Shield ─── */}
+                    <g className="cyber-layer">
+                      <circle cx="200" cy="200" r="160" className="scanning-radar" fill="none" stroke="rgba(201,168,76,0.05)" strokeWidth="40" />
+                      <path d="M160,140 C160,120 240,120 240,140 L240,180 C240,210 200,230 200,230 C200,230 160,210 160,180 Z" 
+                        className="master-shield" fill="rgba(13,27,62,0.6)" stroke="#C9A84C" strokeWidth="3" filter="url(#glow)" />
+                      {/* Matrix Rain effect inside shield */}
+                      <text x="185" y="165" className="binary-stream" fill="#C9A84C" fontSize="10" fontFamily="monospace">1011</text>
+                      <text x="185" y="185" className="binary-stream" fill="#C9A84C" fontSize="10" fontFamily="monospace" style={{animationDelay: '0.5s'}}>0101</text>
+                    </g>
+
+                    {/* CORE PULSE */}
+                    <circle cx="200" cy="200" r="180" className="outer-pulse" fill="none" stroke="rgba(201,168,76,0.03)" strokeWidth="2" />
+                  </svg>
+                  <div className="tech-status-container">
+                    <span className="status-item"><span className="status-dot"></span> SECURE</span>
+                    <span className="status-item"><span className="status-dot"></span> DEPLOYED</span>
+                    <span className="status-item"><span className="status-dot"></span> ANALYZED</span>
+                  </div>
+                </div>
               </div>
               {aboutBadges.map((badge, i) => (
                 <div key={i} className={`about-badge about-badge-${i + 1}`}>
@@ -219,6 +285,123 @@ export default function Home() {
         </section>
       )}
 
+      {/* ENGINEERING EXCELLENCE SECTION */}
+      <section className="unified-eng-section">
+        <div className="pipeline-grid-bg"></div>
+        <div className="eng-container">
+          <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
+            <div className="section-eyebrow reveal" style={{ color: 'var(--gold)', justifyContent: 'center' }}>Engineering Excellence</div>
+            <h2 className="section-title reveal reveal-delay-1" style={{ color: 'var(--white)' }}>Built for Reliability & Growth.</h2>
+            <p className="section-desc reveal reveal-delay-2" style={{ color: 'rgba(255,255,255,0.6)', margin: '1.5rem auto 0', maxWidth: '700px' }}>
+              We don't fake scale. We build systems using real-world tools and proven methodologies that ensure your product is secure, stable, and ready to grow.
+            </p>
+          </div>
+
+          <div className="eng-visual-flow">
+            {/* Card 1: SECURITY */}
+            <div className="eng-card card-security reveal reveal-delay-3">
+              <div className="tier-badge">SECURITY FIRST</div>
+              <div className="eng-icon-box">🛡️</div>
+              <div className="eng-label">Hardened Security</div>
+              <div className="eng-sublabel">Zero-trust architecture. Always.</div>
+              
+              <div className="tech-stack-list">
+                <div className="tech-stack-group">
+                  <span className="tech-stack-title">🔐 IDENTITY & ACCESS</span>
+                  <div className="tech-stack-item">HashiCorp Vault (Secrets)</div>
+                  <div className="tech-stack-item">Keycloak / Auth0 (Identity)</div>
+                  <div className="tech-stack-item">AWS IAM + RBAC Policies</div>
+                </div>
+                <div className="tech-stack-group">
+                  <span className="tech-stack-title">🛡️ APP SECURITY</span>
+                  <div className="tech-stack-item">Snyk / SonarQube Scanning</div>
+                  <div className="tech-stack-item">OWASP Top 10 Hardened Builds</div>
+                  <div className="tech-stack-item">Trivy Container Security</div>
+                </div>
+                <div className="tech-stack-group">
+                  <span className="tech-stack-title">🌐 NETWORK & COMPLIANCE</span>
+                  <div className="tech-stack-item">Cloudflare WAF + DDoS Shield</div>
+                  <div className="tech-stack-item">Security-First Engineering Culture</div>
+                </div>
+              </div>
+
+              <div className="eng-terminal">
+                <div className="terminal-line"><span>> stack</span><span>Vault + Keycloak + Snyk</span></div>
+                <div className="terminal-line"><span>> approach</span><span>Zero-trust architecture</span></div>
+                <div className="terminal-line"><span>> audit</span><span>OWASP Top 10 hardened</span></div>
+                <div className="terminal-line highlight"><span>> status</span><span>Security-first from line 1</span></div>
+              </div>
+            </div>
+
+            {/* Card 2: DATABASE */}
+            <div className="eng-card card-database reveal reveal-delay-4">
+              <div className="tier-badge">RELIABLE DATA</div>
+              <div className="eng-icon-box">🗄️</div>
+              <div className="eng-label">Data Infrastructure</div>
+              <div className="eng-sublabel">Honest, scalable stacks.</div>
+
+              <div className="tech-stack-list">
+                <div className="tech-stack-group">
+                  <span className="tech-stack-title">🗄️ PRIMARY STACK</span>
+                  <div className="tech-stack-item">PostgreSQL / MongoDB Atlas</div>
+                  <div className="tech-stack-item">Redis Caching Layer</div>
+                </div>
+                <div className="tech-stack-group">
+                  <span className="tech-stack-title">📦 SCALING</span>
+                  <div className="tech-stack-item">Horizontal Sharding Ready</div>
+                  <div className="tech-stack-item">Read Replicas & Load Balancing</div>
+                </div>
+                <div className="tech-stack-group">
+                  <span className="tech-stack-title">☁️ BACKUP & RECOVERY</span>
+                  <div className="tech-stack-item">Automated Daily Backups</div>
+                  <div className="tech-stack-item">Point-in-Time Recovery (PITR)</div>
+                </div>
+              </div>
+
+              <div className="eng-terminal">
+                <div className="terminal-line"><span>> primary</span><span>PostgreSQL / MongoDB Atlas</span></div>
+                <div className="terminal-line"><span>> caching</span><span>Redis</span></div>
+                <div className="terminal-line"><span>> scaling</span><span>Horizontal sharding ready</span></div>
+                <div className="terminal-line highlight"><span>> backup</span><span>Automated + PITR recovery</span></div>
+              </div>
+            </div>
+
+            {/* Card 3: DELIVERY */}
+            <div className="eng-card card-delivery reveal reveal-delay-5">
+              <div className="tier-badge">MODERN DEVOPS</div>
+              <div className="eng-icon-box">🚀</div>
+              <div className="eng-label">Reliable Delivery</div>
+              <div className="eng-sublabel">Automated pipelines. No surprises.</div>
+
+              <div className="tech-stack-list">
+                <div className="tech-stack-group">
+                  <span className="tech-stack-title">🚀 INFRASTRUCTURE</span>
+                  <div className="tech-stack-item">AWS / GCP + Kubernetes (EKS/GKE)</div>
+                  <div className="tech-stack-item">Terraform Infrastructure-as-Code</div>
+                </div>
+                <div className="tech-stack-group">
+                  <span className="tech-stack-title">🌍 PIPELINE</span>
+                  <div className="tech-stack-item">GitHub Actions / GitLab CI</div>
+                  <div className="tech-stack-item">ArgoCD (GitOps Delivery)</div>
+                </div>
+                <div className="tech-stack-group">
+                  <span className="tech-stack-title">📊 OBSERVABILITY</span>
+                  <div className="tech-stack-item">Prometheus + Grafana Metrics</div>
+                  <div className="tech-stack-item">OpenTelemetry Tracing</div>
+                </div>
+              </div>
+
+              <div className="eng-terminal">
+                <div className="terminal-line"><span>> infra</span><span>AWS / GCP + Kubernetes</span></div>
+                <div className="terminal-line"><span>> pipeline</span><span>GitHub Actions → ArgoCD</span></div>
+                <div className="terminal-line"><span>> deploy</span><span>Blue-green, zero downtime</span></div>
+                <div className="terminal-line highlight"><span>> monitoring</span><span>Grafana + Prometheus</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* PROJECTS */}
       {sec.projects && (
         <section id="projects">
@@ -269,6 +452,19 @@ export default function Home() {
                 </div>
               </div>
             ))}
+            {testimonials.length === 0 && (
+              <div className="reveal" style={{ 
+                textAlign: 'center', 
+                color: '#9A9990', 
+                padding: '4rem 0', 
+                gridColumn: '1 / -1',
+                fontSize: '1.1rem',
+                fontStyle: 'italic',
+                opacity: 0.8
+              }}>
+                waiting for 1st feedback
+              </div>
+            )}
           </div>
         </section>
       )}
@@ -376,6 +572,19 @@ export default function Home() {
                 <a href="mailto:careers@paviqlabs.in" className="job-apply">Apply Now →</a>
               </div>
             ))}
+            {jobOpenings.length === 0 && (
+              <div className="reveal" style={{ 
+                textAlign: 'center', 
+                color: '#9A9990', 
+                padding: '3rem 0', 
+                gridColumn: '1 / -1',
+                fontSize: '1.1rem',
+                fontStyle: 'italic',
+                opacity: 0.8
+              }}>
+                No open roles currently. Check back later!
+              </div>
+            )}
           </div>
         </section>
       )}
