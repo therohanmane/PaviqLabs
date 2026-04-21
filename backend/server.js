@@ -6,12 +6,12 @@ import morgan from 'morgan'
 import rateLimit from 'express-rate-limit'
 import mongoose from 'mongoose'
 
-// ✅ SAFE IMPORT (no crash if missing)
+// ─── SAFE COMPRESSION IMPORT ───
 let compressionMiddleware = (req, res, next) => next()
 try {
   const compression = await import('compression')
   compressionMiddleware = compression.default()
-} catch (err) {
+} catch {
   console.warn('⚠️ Compression not available, skipping...')
 }
 
@@ -43,26 +43,31 @@ app.use(
   })
 )
 
-// ✅ FIXED DYNAMIC CORS
+// ─── ✅ DYNAMIC CORS (FINAL FIX) ───
 const allowedOrigins = [
   'https://paviqlabs.in',
   'https://www.paviqlabs.in',
-  'https://paviq-labs.vercel.app', // 🔥 IMPORTANT (your current frontend)
   'http://localhost:3000',
-  'http://localhost:5173'
+  'http://localhost:5173',
 ]
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin) return callback(null, true) // allow Postman / curl
+      if (!origin) return callback(null, true)
 
+      // ✅ Allow custom domains
       if (allowedOrigins.includes(origin)) {
         return callback(null, true)
-      } else {
-        console.error('❌ CORS Blocked:', origin)
-        return callback(new Error('Not allowed by CORS'))
       }
+
+      // ✅ Allow ALL Vercel deployments (preview + production)
+      if (origin.endsWith('.vercel.app')) {
+        return callback(null, true)
+      }
+
+      console.error('❌ CORS Blocked:', origin)
+      return callback(new Error('Not allowed by CORS'))
     },
     credentials: true,
   })
