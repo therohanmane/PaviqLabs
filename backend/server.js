@@ -6,7 +6,7 @@ import morgan from 'morgan'
 import rateLimit from 'express-rate-limit'
 import mongoose from 'mongoose'
 
-// ✅ SAFE IMPORT (prevents crash if missing)
+// ✅ SAFE IMPORT (no crash if missing)
 let compressionMiddleware = (req, res, next) => next()
 try {
   const compression = await import('compression')
@@ -15,7 +15,7 @@ try {
   console.warn('⚠️ Compression not available, skipping...')
 }
 
-// Routes
+// ─── ROUTES ───
 import contactRoute from './routes/contact.js'
 import adminRoute from './routes/admin.js'
 import projectsRoute from './routes/projects.js'
@@ -43,20 +43,32 @@ app.use(
   })
 )
 
+// ✅ FIXED DYNAMIC CORS
+const allowedOrigins = [
+  'https://paviqlabs.in',
+  'https://www.paviqlabs.in',
+  'https://paviq-labs.vercel.app', // 🔥 IMPORTANT (your current frontend)
+  'http://localhost:3000',
+  'http://localhost:5173'
+]
+
 app.use(
   cors({
-    origin:
-      process.env.NODE_ENV === 'production'
-        ? [
-            'https://paviqlabs.in',
-            'https://www.paviqlabs.in',
-            'https://paviq-labs-63x3.vercel.app'
-          ]
-        : ['http://localhost:3000', 'http://localhost:5173'],
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true) // allow Postman / curl
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true)
+      } else {
+        console.error('❌ CORS Blocked:', origin)
+        return callback(new Error('Not allowed by CORS'))
+      }
+    },
     credentials: true,
   })
 )
 
+// ─── LOGGER ───
 if (process.env.NODE_ENV !== 'production') {
   app.use(morgan('dev'))
 }
@@ -110,7 +122,15 @@ app.get('/api/health', (req, res) => {
 
 // ─── ERROR HANDLER ───
 app.use((err, req, res, next) => {
-  console.error(err.stack)
+  console.error('🔥 ERROR:', err.message)
+
+  if (err.message === 'Not allowed by CORS') {
+    return res.status(403).json({
+      success: false,
+      message: 'CORS error: Origin not allowed',
+    })
+  }
+
   res.status(500).json({
     success: false,
     message: 'Internal server error',
