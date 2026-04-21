@@ -6,7 +6,7 @@ import PageLoader from './components/PageLoader.jsx'
 import Cursor from './components/Cursor.jsx'
 import BackToTop from './components/BackToTop.jsx'
 import WhatsAppBtn from './components/WhatsAppBtn.jsx'
-import LiveChat from './components/LiveChat.jsx'
+import Chatbot from './components/Chatbot.jsx'
 
 export default function App() {
   const [loading, setLoading] = useState(true)
@@ -26,7 +26,7 @@ export default function App() {
       </Routes>
       <BackToTop />
       <WhatsAppBtn />
-      <LiveChat />
+      <Chatbot />
     </Router>
   )
 }

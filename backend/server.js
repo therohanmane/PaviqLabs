@@ -14,6 +14,7 @@ import settingsRoute from './routes/settings.js'
 import insightsRoute from './routes/insights.js'
 import heroImagesRoute from './routes/heroImages.js'
 import servicesRoute from './routes/services.js'
+import chatRoute from './routes/chat.js'
 
 const __dirname = path.dirname(fileURLToPath(
     import.meta.url))
@@ -158,6 +159,7 @@ app.use('/api/settings', settingsRoute)
 app.use('/api/insights', insightsRoute)
 app.use('/api/hero-images', heroImagesRoute)
 app.use('/api/services', servicesRoute)
+app.use('/api/chat', chatRoute)
 
 // Health check
 app.get('/api/health', (req, res) => {

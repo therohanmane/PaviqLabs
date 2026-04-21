@@ -560,8 +560,7 @@ export default function Admin() {
     empty: { padding: '3rem', textAlign: 'center', color: '#9A9990' },
     loginBox: { minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#060E21' },
     loginCard: { background: 'white', borderRadius: '24px', padding: '3rem', width: '100%', maxWidth: '400px' },
-    loginTitle: { fontFamily: 'Syne, sans-serif', fontWeight: 800, fontSize: '1.8rem', color: '#0D1B3E', marginBottom: '0.5rem' },
-    loginSub: { fontSize: '0.875rem', color: '#6B6A66', marginBottom: '2rem' },
+    loginTitle: { fontFamily: 'Syne, sans-serif', fontWeight: 800, fontSize: '1.8rem', color: '#0D1B3E', marginBottom: '2rem' },
     input: { width: '100%', border: '1px solid #EDECE8', borderRadius: '10px', padding: '0.85rem 1rem', fontSize: '0.9rem', outline: 'none', marginBottom: '1rem', fontFamily: 'DM Sans, sans-serif' },
     loginBtn: { width: '100%', background: '#0D1B3E', color: 'white', border: 'none', borderRadius: '100px', padding: '1rem', fontFamily: 'Syne, sans-serif', fontWeight: 700, fontSize: '0.95rem', cursor: 'pointer' },
     errMsg: { color: '#dc2626', fontSize: '0.82rem', marginBottom: '1rem' },
@@ -572,7 +571,6 @@ export default function Admin() {
       <div style={adminStyles.loginBox}>
         <div style={adminStyles.loginCard}>
           <div style={adminStyles.loginTitle}>Admin Login</div>
-          <div style={adminStyles.loginSub}>PaviqLabs CRM Dashboard</div>
           {loginErr && <div style={adminStyles.errMsg}>⚠️ {loginErr}</div>}
           <input style={adminStyles.input} placeholder="Username" value={loginForm.username}
             onChange={e => setLoginForm(f => ({ ...f, username: e.target.value }))} />
