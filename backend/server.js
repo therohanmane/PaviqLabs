@@ -5,15 +5,7 @@ import helmet from 'helmet'
 import morgan from 'morgan'
 import rateLimit from 'express-rate-limit'
 import mongoose from 'mongoose'
-
-// ─── SAFE COMPRESSION IMPORT ───
-let compressionMiddleware = (req, res, next) => next()
-try {
-  const compression = await import('compression')
-  compressionMiddleware = compression.default()
-} catch {
-  console.warn('⚠️ Compression not available, skipping...')
-}
+import compression from 'compression'
 
 // ─── ROUTES ───
 import contactRoute from './routes/contact.js'
@@ -32,8 +24,7 @@ app.set('trust proxy', 1)
 const PORT = process.env.PORT || 5000
 
 // ─── MIDDLEWARE ───
-app.use(compressionMiddleware)
-
+app.use(compression())
 app.use(express.json({ limit: '10mb' }))
 app.use(express.urlencoded({ extended: false }))
 
@@ -43,7 +34,7 @@ app.use(
   })
 )
 
-// ─── ✅ DYNAMIC CORS (FINAL FIX) ───
+// ─── ✅ FINAL CORS FIX ───
 const allowedOrigins = [
   'https://paviqlabs.in',
   'https://www.paviqlabs.in',
@@ -56,17 +47,17 @@ app.use(
     origin: (origin, callback) => {
       if (!origin) return callback(null, true)
 
-      // ✅ Allow custom domains
+      // allow exact domains
       if (allowedOrigins.includes(origin)) {
         return callback(null, true)
       }
 
-      // ✅ Allow ALL Vercel deployments (preview + production)
-      if (origin.endsWith('.vercel.app')) {
+      // allow ALL vercel deployments
+      if (origin && origin.endsWith('.vercel.app')) {
         return callback(null, true)
       }
 
-      console.error('❌ CORS Blocked:', origin)
+      console.log('❌ CORS Blocked:', origin)
       return callback(new Error('Not allowed by CORS'))
     },
     credentials: true,
@@ -79,18 +70,12 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 // ─── RATE LIMIT ───
-const contactLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 5,
-  message: { success: false, message: 'Too many requests' },
-})
-
-const generalLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 200,
-})
-
-app.use(generalLimiter)
+app.use(
+  rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 200,
+  })
+)
 
 // ─── DATABASE ───
 if (process.env.MONGODB_URI) {
@@ -100,15 +85,10 @@ if (process.env.MONGODB_URI) {
     .catch((err) => console.error('MongoDB error:', err))
 } else {
   console.warn('⚠️ No DB — using in-memory fallback')
-  global.inMemoryProjects = []
-  global.inMemorySettings = {}
-  global.inMemoryInsights = []
-  global.inMemoryHeroImages = []
-  global.inMemoryServices = []
 }
 
 // ─── ROUTES ───
-app.use('/api/contact', contactLimiter, contactRoute)
+app.use('/api/contact', contactRoute)
 app.use('/api/admin', adminRoute)
 app.use('/api/projects', projectsRoute)
 app.use('/api/settings', settingsRoute)
@@ -142,8 +122,7 @@ app.use((err, req, res, next) => {
   })
 })
 
-// ─── START SERVER ───
+// ─── START ───
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`)
-  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`)
 })
