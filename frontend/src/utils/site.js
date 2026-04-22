@@ -94,19 +94,19 @@ export const jobOpenings = [
 
 export const founders = [
   {
-    initials: 'RK',
-    name: 'Rohan',
+    initials: 'RM',
+    name: 'Rohan Mane',
     role: 'Co-Founder · Cybersecurity & Networking',
     bio: 'Technologist focused on secure architecture, resilient networks, and shipping products that survive real-world traffic and threats.',
-    tags: ['Ethical Hacking', 'DevOps', 'Cloud', 'Zero Trust'],
+    tags: ['Cyber Security', 'Marketing', 'Networking', 'UI/UX'],
     linkedin: 'https://www.linkedin.com/company/paviqlabs',
   },
   {
     initials: 'KS',
-    name: 'Kaushal',
+    name: 'Kaushal Singh',
     role: 'Co-Founder · Engineering & Delivery',
     bio: 'Builds scalable platforms end-to-end — from crisp UX to dependable backends — with an obsession for clarity and measurable outcomes.',
-    tags: ['Full-Stack', 'Product', 'AI', 'Performance'],
+    tags: ['DevOps', 'Cloud', 'AI', 'Full-Stack'],
     linkedin: 'https://www.linkedin.com/company/paviqlabs',
   },
 ]
