@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics/react'
 import Home from './pages/Home.jsx'
 import Admin from './pages/Admin.jsx'
 import PageLoader from './components/PageLoader.jsx'
@@ -18,6 +19,7 @@ export default function App() {
 
   return (
     <Router>
+      <Analytics />
       <PageLoader hidden={!loading} />
       <Cursor />
       <Routes>
