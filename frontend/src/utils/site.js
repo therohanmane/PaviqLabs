@@ -99,7 +99,7 @@ export const founders = [
     role: 'Co-Founder · Cybersecurity & Networking',
     bio: 'Technologist focused on secure architecture, resilient networks, and shipping products that survive real-world traffic and threats.',
     tags: ['Cyber Security', 'Marketing', 'Networking', 'UI/UX'],
-    linkedin: 'https://www.linkedin.com/company/paviqlabs',
+    linkedin: 'https://www.linkedin.com/in/rohan-mane-5bb217289/',
   },
   {
     initials: 'KS',
@@ -107,6 +107,6 @@ export const founders = [
     role: 'Co-Founder · Engineering & Delivery',
     bio: 'Builds scalable platforms end-to-end — from crisp UX to dependable backends — with an obsession for clarity and measurable outcomes.',
     tags: ['DevOps', 'Cloud', 'AI', 'Full-Stack'],
-    linkedin: 'https://www.linkedin.com/company/paviqlabs',
+    linkedin: 'https://www.linkedin.com/in/kaushal-singh-508368252/',
   },
 ]
