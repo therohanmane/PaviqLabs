@@ -3261,3 +3261,62 @@ footer {
     transition: top 3s ease-out, left 3s ease-out, transform 0.2s ease;
     pointer-events: none;
 }
+
+/* ================= GLOBAL FIX ================= */
+body {
+  background-color: #0f172a;
+  color: #f1f5f9;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* ================= HERO FIX ================= */
+.hero-content {
+  color: #ffffff;
+}
+
+.hero-headline {
+  color: #ffffff;
+}
+
+.hero-sub-quote {
+  color: #cbd5f5;
+}
+
+/* ================= STATS FIX ================= */
+.hero-stat-card {
+  background: #020617;
+  color: #ffffff;
+}
+
+.hero-stat-label {
+  color: #94a3b8;
+}
+
+/* ================= CONTACT FIX ================= */
+#contact {
+  color: #ffffff;
+}
+
+.section-title {
+  color: #ffffff;
+}
+
+.section-desc {
+  color: #cbd5e1;
+}
+
+.contact-info-val {
+  color: #e2e8f0;
+}
+
+/* ================= FORM FIX ================= */
+input, textarea, select {
+  background: #020617;
+  color: #ffffff;
+  border: 1px solid #334155;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #64748b;
+}
