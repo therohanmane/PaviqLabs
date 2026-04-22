@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import api from '../utils/api.js'
+import api, { API_UNAVAILABLE } from '../utils/api.js'
 import Navbar from '../components/Navbar.jsx'
 import Footer from '../components/Footer.jsx'
 import Hero from '../components/Hero.jsx'
@@ -33,7 +33,13 @@ export default function Home() {
         setServicesList(s.data.services || [])
       } catch (err) {
         console.error(err)
-        setError('Failed to load data')
+        if (err?.code === API_UNAVAILABLE) {
+          setProjectsList([])
+          setInsights([])
+          setServicesList([])
+        } else {
+          setError('Failed to load data')
+        }
       } finally {
         setLoading(false)
       }

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
-import api from '../utils/api.js'
+import api, { API_UNAVAILABLE } from '../utils/api.js'
 
 // ─── Status Dot (minimal enabled/disabled indicator) ───
 const StatusDot = ({ active }) => (
@@ -166,8 +166,12 @@ export default function Admin() {
       setToken(t)
       setLoginErr('')
     } catch (err) {
-      const msg = err.response?.data?.message
-      setLoginErr(typeof msg === 'string' && msg ? msg : 'Invalid credentials.')
+      if (err?.code === API_UNAVAILABLE) {
+        setLoginErr('API is not configured. Set VITE_API_URL to your backend origin on Vercel, then redeploy.')
+      } else {
+        const msg = err.response?.data?.message
+        setLoginErr(typeof msg === 'string' && msg ? msg : 'Invalid credentials.')
+      }
     }
   }
 

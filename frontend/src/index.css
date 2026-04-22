@@ -1025,9 +1025,16 @@ section {
     background: var(--navy);
     border-radius: 24px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    padding: 1.5rem 1.25rem 1.35rem;
     overflow: hidden;
+}
+
+.about-card-main > * {
+    position: relative;
+    z-index: 1;
 }
 
 .about-card-main::before {
@@ -1049,9 +1056,12 @@ section {
 /* ─── TECH UNIVERSE ANIMATION ─── */
 
 .tech-universe-svg {
-    width: 95%;
+    width: 92%;
+    max-width: 420px;
     height: auto;
-    max-width: 480px;
+    flex: 1 1 auto;
+    min-height: 0;
+    align-self: center;
     filter: drop-shadow(0 0 30px rgba(201, 168, 76, 0.15));
     transition: transform 0.6s var(--ease-out), filter 0.6s var(--ease-out);
 }
@@ -1273,21 +1283,33 @@ section {
 /* Status Terminal */
 
 .tech-status-container {
-    display: flex;
-    gap: 1.5rem;
-    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: center;
+    justify-items: center;
+    column-gap: 0.5rem;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 0;
+    padding: 0 0.25rem;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
     font-weight: 700;
+    text-transform: uppercase;
+    flex-shrink: 0;
 }
 
 .status-item {
     color: var(--gold);
-    opacity: 0.8;
+    opacity: 0.88;
     display: flex;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    line-height: 1.2;
+    white-space: nowrap;
     transition: opacity 0.3s, transform 0.3s;
 }
 
@@ -3003,9 +3025,16 @@ section {
     .tech-universe-svg {
         width: 100%;
     }
+    .tech-status-container {
+        font-size: 0.58rem;
+        letter-spacing: 0.1em;
+        column-gap: 0.35rem;
+        padding: 0;
+    }
+
     .status-item {
-        font-size: 0.65rem;
-        gap: 4px;
+        font-size: inherit;
+        letter-spacing: inherit;
     }
     .job-card {
         flex-direction: column;

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import api from '../utils/api.js'
+import api, { API_UNAVAILABLE } from '../utils/api.js'
 
 const services = [
   'Web Development', 'Mobile App Development', 'Cybersecurity',
@@ -40,7 +40,11 @@ export default function ContactSection() {
       setSuccess(true)
       setForm({ firstName: '', lastName: '', email: '', company: '', service: '', otherService: '', message: '' })
     } catch (err) {
-      setError(err.response?.data?.message || 'Failed to send. Please email info@paviqlabs.in directly.')
+      if (err?.code === API_UNAVAILABLE) {
+        setError('Cannot send: API URL is not configured for this deployment.')
+      } else {
+        setError(err.response?.data?.message || 'Failed to send. Please email info@paviqlabs.in directly.')
+      }
     } finally {
       setLoading(false)
     }
