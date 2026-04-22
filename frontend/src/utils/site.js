@@ -43,24 +43,45 @@ export const services = [
   },
 ]
 
-
-
 export const testimonials = []
-
-// blogPosts are now fetched dynamically from the database using /api/insights
 
 export const trustedBy = []
 
 export const marqueeItems = [
-  'Web Development', 'Mobile Apps', 'Cybersecurity', 'Cloud Solutions',
-  'AI & Automation', 'UI/UX Design', 'IT Consulting', 'DevOps',
+  'Cybersecurity',
+  'Cloud Solutions',
+  'AI & Automation',
+  'UI/UX Design',
+  'IT Consulting',
+  'DevOps',
+  'Web Development',
 ]
 
 export const processSteps = [
-  { num: '01', icon: '🔍', title: 'Discovery', desc: 'Deep-dive workshops to understand your business, users, and technical landscape.' },
-  { num: '02', icon: '✏️', title: 'Design', desc: 'Architecture blueprints, UI prototypes, and technical specifications before a line of code.' },
-  { num: '03', icon: '⚡', title: 'Build', desc: 'Agile sprints with weekly demos, transparent progress, and zero surprises.' },
-  { num: '04', icon: '🚀', title: 'Launch & Scale', desc: 'Rigorous QA, staged rollout, post-launch monitoring, and ongoing support.' },
+  {
+    num: '01',
+    icon: '🔍',
+    title: 'Discover & Assess',
+    desc: 'We map your requirements, infrastructure, and security posture before touching a single tool.',
+  },
+  {
+    num: '02',
+    icon: '🛠️',
+    title: 'Plan & Architect',
+    desc: 'We design a secure, scalable solution — cloud setup, pipelines, and tech stack — before we build.',
+  },
+  {
+    num: '03',
+    icon: '⚡',
+    title: 'Build & Secure',
+    desc: 'Development and security run in parallel — not as an afterthought. Every sprint ships tested, hardened code.',
+  },
+  {
+    num: '04',
+    icon: '🚀',
+    title: 'Deploy & Monitor',
+    desc: 'CI/CD deployment, live monitoring, and continuous security checks — long after go-live.',
+  },
 ]
 
 export const jobOpenings = [
@@ -73,17 +94,19 @@ export const jobOpenings = [
 
 export const founders = [
   {
-    initials: 'RM',
-    name: 'Rohan Mane',
-    role: 'Co-Founder',
-    bio: 'A passionate technologist and entrepreneur driving PaviqLabs\' product vision and engineering excellence. Rohan leads development strategy, ensuring every product we build is scalable, secure, and impactful.',
+    initials: 'RK',
+    name: 'Rohan',
+    role: 'Co-Founder · Cybersecurity & Networking',
+    bio: 'Technologist focused on secure architecture, resilient networks, and shipping products that survive real-world traffic and threats.',
+    tags: ['Ethical Hacking', 'DevOps', 'Cloud', 'Zero Trust'],
     linkedin: 'https://www.linkedin.com/company/paviqlabs',
   },
   {
     initials: 'KS',
-    name: 'Kaushal Singh',
-    role: 'Co-Founder',
-    bio: 'A strategic mind with a deep passion for cybersecurity and digital transformation. Kaushal leads PaviqLabs\' client strategy and security practice, helping businesses future-proof their digital infrastructure.',
+    name: 'Kaushal',
+    role: 'Co-Founder · Engineering & Delivery',
+    bio: 'Builds scalable platforms end-to-end — from crisp UX to dependable backends — with an obsession for clarity and measurable outcomes.',
+    tags: ['Full-Stack', 'Product', 'AI', 'Performance'],
     linkedin: 'https://www.linkedin.com/company/paviqlabs',
   },
 ]

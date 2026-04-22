@@ -3,6 +3,22 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import api from '../utils/api.js'
 import '../styles/chatbot.css'
 
+function IconChatBubble() {
+  return (
+    <svg className="paviq-chat-fab-icon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+      <path d="M5 4h14a2 2 0 012 2v9a2 2 0 01-2 2h-4.5L9 21v-4H5a2 2 0 01-2-2V6a2 2 0 012-2z" />
+    </svg>
+  )
+}
+
+function IconClose() {
+  return (
+    <svg className="paviq-chat-fab-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+      <path d="M6 6l12 12M18 6L6 18" />
+    </svg>
+  )
+}
+
 const WELCOME =
   'Hey 👋 Welcome to PaviqLabs. How can I help you today? Would you like to start a project or talk to our team?'
 
@@ -100,13 +116,13 @@ export default function Chatbot() {
     <div className="paviq-chat-root" aria-live="polite">
       <button
         type="button"
-        className="paviq-chat-fab"
+        className={`paviq-chat-fab${open ? ' paviq-chat-fab--open' : ''}`}
         onClick={() => setOpen(o => !o)}
         aria-expanded={open}
         aria-controls="paviq-chat-panel"
-        title={open ? 'Close chat' : 'Open PaviqLabs chat'}
+        title={open ? 'Close chat' : 'Chat with PaviqLabs'}
       >
-        {open ? '✕' : '💬'}
+        {open ? <IconClose /> : <IconChatBubble />}
       </button>
 
       <div
@@ -118,13 +134,15 @@ export default function Chatbot() {
         aria-hidden={!open}
       >
         <header className="paviq-chat-header">
-          <div className="paviq-chat-header-avatar">PL</div>
+          <div className="paviq-chat-header-avatar" aria-hidden>
+            <IconChatBubble />
+          </div>
           <div className="paviq-chat-header-text">
             <div className="paviq-chat-header-title">PaviqLabs</div>
-            <div className="paviq-chat-header-sub">Assistant · rule-based</div>
+            <div className="paviq-chat-header-sub">How can we help you today?</div>
           </div>
           <button type="button" className="paviq-chat-close" onClick={() => setOpen(false)} aria-label="Close">
-            ×
+            <IconClose />
           </button>
         </header>
 

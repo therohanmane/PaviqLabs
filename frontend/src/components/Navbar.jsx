@@ -9,6 +9,8 @@ const links = [
   { href: '#careers', label: 'Careers' },
 ]
 
+const displayLabel = (label) => label.toUpperCase()
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
@@ -44,10 +46,10 @@ export default function Navbar() {
         <div className="nav-links">
           {links.map(l => (
             <a key={l.href} href={l.href} className={activeSection === l.href.slice(1) ? 'active' : ''}>
-              {l.label}
+              {displayLabel(l.label)}
             </a>
           ))}
-          <a href="#contact" className="nav-cta">Get in Touch</a>
+          <a href="#contact" className="nav-cta">GET IN TOUCH</a>
         </div>
         <button className="nav-hamburger" onClick={() => setMenuOpen(true)} aria-label="Open menu">
           <span /><span /><span />
@@ -56,8 +58,8 @@ export default function Navbar() {
 
       <div className={`mobile-menu${menuOpen ? ' open' : ''}`}>
         <button className="mobile-close" onClick={close}>✕</button>
-        {links.map(l => <a key={l.href} href={l.href} onClick={close}>{l.label}</a>)}
-        <a href="#contact" onClick={close} style={{ color: 'var(--gold)' }}>Get in Touch</a>
+        {links.map(l => <a key={l.href} href={l.href} onClick={close}>{displayLabel(l.label)}</a>)}
+        <a href="#contact" onClick={close} style={{ color: 'var(--gold)' }}>GET IN TOUCH</a>
       </div>
     </>
   )

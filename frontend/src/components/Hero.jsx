@@ -121,12 +121,6 @@ export default function Hero() {
   return (
     <>
       <section id="hero">
-        <div className="hero-fluid-bg">
-          <div className="fluid-orb fluid-orb-1" />
-          <div className="fluid-orb fluid-orb-2" />
-          <div className="fluid-orb fluid-orb-3" />
-        </div>
-
         {/* ─── GLOBAL TRUST & DEVELOPMENT ANIMATION ─── */}
         <div className="hero-global-visual">
           <svg viewBox="0 0 1000 1000" className="hero-globe-svg">
