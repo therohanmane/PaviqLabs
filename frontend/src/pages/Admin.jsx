@@ -165,8 +165,9 @@ export default function Admin() {
       localStorage.setItem('admin_token', t)
       setToken(t)
       setLoginErr('')
-    } catch {
-      setLoginErr('Invalid credentials.')
+    } catch (err) {
+      const msg = err.response?.data?.message
+      setLoginErr(typeof msg === 'string' && msg ? msg : 'Invalid credentials.')
     }
   }
 
